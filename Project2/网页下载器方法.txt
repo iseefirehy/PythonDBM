@@ -1,0 +1,34 @@
+import urllib2
+直接请求
+response = urllib2.urlopen('http://www.baidu.com')
+
+获取状态码，如果是200表示获取成功
+print response.getcode()
+
+读取内容
+cont = response.read()
+------------------------------------------------
+import urllib2
+创建Request对象
+request = urllib2.Request(url)
+
+添加数据
+request.add_data('a', '1')
+添加http的header
+request.add_header('User-Agent', 'Mozilla/5.0')
+
+发送请求获取结果
+response = urllib2.urlopen(request)
+-----------------------------------------------
+import urllib2, cookielib
+创建cookie容器
+cj = cookielib.CookieJar()
+
+创建1个opener
+opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+
+给urllib2安装opener
+urllib2.install_opener(opener)
+
+使用带有cookie的urllib2访问网页
+response = urllib2.urlopen("http://www.baidu.com/")
